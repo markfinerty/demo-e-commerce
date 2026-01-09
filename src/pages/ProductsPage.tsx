@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { type Product } from "../types"
-;
+import { type Product } from "../types";
+
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);

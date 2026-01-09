@@ -1,4 +1,4 @@
-export default function About() {
+export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto py-16">
       <h2 className="text-4xl font-bold text-white mb-8 border-l-4 border-[#ea7bdf] pl-6">

@@ -4,18 +4,11 @@ import { Footer } from "../components/Footer";
 
 function RootLayout() {
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Top Navigation */}
+    <div className="flex flex-col min-h-screen bg-[#242424] text-white/90">
       <Navbar />
-
-      {/* Main Content Area */}
-      <main className="grow flex flex-col items-center justify-center p-6">
-        <div className="w-full max-w-7xl">
-          <Outlet />
-        </div>
+      <main className="flex-grow container mx-auto px-4 flex items-center justify-center">
+        <Outlet />
       </main>
-
-      {/* Bottom Footer */}
       <Footer />
     </div>
   );

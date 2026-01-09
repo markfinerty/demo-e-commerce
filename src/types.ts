@@ -1,7 +1,9 @@
-type Robot = {
+type Product = {
   id: number;
-  model: string;
-  isOperational: boolean;
+  title: string;
+  description: string;
+  price: number;
+  thumbnail: string;
 };
 
-export type { Robot };
+export type { Product };

@@ -5,6 +5,7 @@ import RootLayout from "./layouts/RootLayout";
 import HomePage from "./pages/HomePage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
+import ProductsPage from "./pages/ProductsPage.tsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "about", element: <AboutPage /> },
       { path: "contact", element: <ContactPage /> },
+      { path: "products", element: <ProductsPage /> },
     ],
   },
 ]);

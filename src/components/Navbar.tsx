@@ -20,6 +20,12 @@ export function Navbar() {
           >
             Contact
           </Link>
+          <Link
+            to="/products"
+            className="hover:text-[#ea7bdf] transition-colors"
+          >
+            Products
+          </Link>
         </div>
       </div>
     </nav>

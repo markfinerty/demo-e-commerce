@@ -68,13 +68,17 @@ export default function AboutPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { label: "Frontend", tech: "React.js" },
+            { label: "Language", tech: "TypeScript" },
             { label: "Styling", tech: "Tailwind CSS" },
             { label: "Routing", tech: "React Router" },
             { label: "Data", tech: "REST API" },
+            { label: "Cloud", tech: "AWS Services" },
+            { label: "Source Control", tech: "Git & GitHub" },
+            { label: "CI/CD", tech: "AWS CodePipeline" },
           ].map((item, i) => (
             <div
               key={i}
-              className="bg-[#1a1a1a] border border-gray-800 p-6 rounded-xl hover:border-[#ea7bdf]/40 transition-colors"
+              className="bg-[#1a1a1a] border border-gray-800 p-5 rounded-xl hover:border-[#ea7bdf]/40 transition-colors"
             >
               <p className="text-xs text-gray-500 uppercase font-bold mb-1">
                 {item.label}
@@ -91,7 +95,7 @@ export default function AboutPage() {
           Interested in the source code?
         </p>
         <a
-          href="https://github.com"
+          href="https://github.com/markfinerty/demo-e-commerce"
           target="_blank"
           rel="noreferrer"
           className="inline-block border border-[#ea7bdf] text-[#ea7bdf] px-8 py-3 rounded-full font-bold hover:bg-[#ea7bdf] hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(234,123,223,0.2)]"

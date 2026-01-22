@@ -25,3 +25,9 @@ The infrastructure is defined using AWS CloudFormation, which can be viewed and 
 After deploying the stack, all resources will show `CREATE_COMPLETE` status in the CloudFormation console:
 
 ![Stack Deployment Complete](public/demo-stack-complete.png)
+
+## Destroy
+
+Don't forget to destroy the stack to avoid incuring any additional costs.
+
+- Navigate to the stack you've created and select 'delete', this will delete the stack and all the resources created by CloudFormation.

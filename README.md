@@ -28,6 +28,6 @@ After deploying the stack, all resources will show `CREATE_COMPLETE` status in t
 
 ## Destroy
 
-Don't forget to destroy the stack to avoid incuring any additional costs.
+Don't forget to destroy the stack to avoid incurring any additional costs.
 
 - Navigate to the stack you've created and select 'delete', this will delete the stack and all the resources created by CloudFormation.

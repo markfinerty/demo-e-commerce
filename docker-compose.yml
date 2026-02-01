@@ -1,8 +1,0 @@
-# This is just for local develpment and testing, AWS ECS will spin up the container itself.
-services:
-  web-store:
-    build: .
-    ports:
-      - "8080:80"
-    # If the container crashes, it restarts automatically
-    restart: always

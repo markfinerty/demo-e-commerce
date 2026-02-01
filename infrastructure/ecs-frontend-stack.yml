@@ -2,10 +2,12 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: Production-ready ECS Fargate deployment for Ecommerce Frontend
 
 Parameters:
+
   ProjectName:
     Type: String
     Default: ecommerce-web
     Description: The name of the project
+
   Environment:
     Type: String
     Default: prod
@@ -14,17 +16,29 @@ Parameters:
       - staging
       - prod
     Description: Deployment environment
+
   ImageUri:
     Type: String
     Description: The ECR Image URI
+
   VpcId:
     Type: AWS::EC2::VPC::Id
+
   SubnetIds:
     Type: List<AWS::EC2::Subnet::Id>
+
   ClusterName:
     Type: String
     Default: demo-ecommerce-cluster-prod
     Description: The name of the ECS cluster
+  
+  CertificateArn:
+    Type: String
+    Default: ""
+    Description: ARN of the ACM certificate for HTTPS (required for prod)
+
+Conditions:
+  IsProduction: !Equals [!Ref Environment, prod]
 
 Resources:
   # --- 1. COMPUTING (ECS) ---
@@ -38,8 +52,10 @@ Resources:
             Principal:
               Service: ecs-tasks.amazonaws.com
             Action: sts:AssumeRole
+      # This policy lets ECS pull the image from ECR 
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+      # By default, containers are ephemeral—when they die, their logs die with them, so we redirect to cloud watch for retention
       Policies:
         - PolicyName: CloudWatchLogsPolicy
           PolicyDocument:
@@ -155,6 +171,14 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
+          # If we aren't in production, don't add this rule
+        - !If
+          - IsProduction
+          - IpProtocol: tcp
+            FromPort: 443
+            ToPort: 443
+            CidrIp: 0.0.0.0/0
+          - !Ref AWS::NoValue
 
   AlbTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -176,6 +200,20 @@ Resources:
       LoadBalancerArn: !Ref AppLoadBalancer
       Port: 80
       Protocol: HTTP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref AlbTargetGroup
+
+  # Add new HTTPS listener - This would be for production, when we have a dedicated domain name and SSL certificate 
+  AlbListenerHttps:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Condition: IsProduction
+    Properties:
+      LoadBalancerArn: !Ref AppLoadBalancer
+      Port: 443
+      Protocol: HTTPS
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
       DefaultActions:
         - Type: forward
           TargetGroupArn: !Ref AlbTargetGroup
